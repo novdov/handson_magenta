@@ -43,7 +43,7 @@ def interpolate(
     midi_writer.write_midi(interpolate_sequences, output_dir, prefix="interpolate")
     midi_writer.write_plot(interpolate_sequences, output_dir, prefix="interpolate")
 
-    interpolate_sequence = mm.concatenate_sequences(
+    interpolate_sequence = mm.sequences_lib.concatenate_sequences(
         interpolate_sequences, sequence_durations=[4] * num_output
     )
     midi_writer.write_midi(interpolate_sequence, output_dir, prefix="merge")
