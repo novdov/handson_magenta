@@ -56,3 +56,33 @@ def interpolate(
     )
 
     return interpolate_sequence
+
+
+def groove(
+    model_name: str,
+    interpolate_sequence: NoteSequence,
+    num_steps_per_sample: int,
+    num_output: int,
+    total_bars: int,
+    output_dir: Union[str, Path],
+) -> NoteSequence:
+    model = utils.get_model(model_name)
+    split_interpolate_sequences = mm.sequences_lib.split_note_sequence(
+        interpolate_sequence, 4
+    )
+    encoding, mu, sigma = model.encode(note_sequences=split_interpolate_sequences)
+    groove_sequences = model.decode(z=encoding, length=num_steps_per_sample)
+    groove_sequence = mm.sequences_lib.concatenate_sequences(
+        groove_sequences, [4] * num_output
+    )
+
+    midi_writer = utils.MIDIWriter()
+    midi_writer.write_midi(groove_sequence, output_dir, prefix="groove")
+    midi_writer.write_plot(
+        groove_sequence,
+        output_dir,
+        prefix="groove",
+        plot_max_length_bar=total_bars,
+        bar_fill_alphas=[0.5, 0.5, 0.05, 0.05],
+    )
+    return groove_sequence
