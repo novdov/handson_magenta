@@ -42,10 +42,7 @@ def get_model(name: str, batch_size: int = 8):
 
 
 class MIDIWriter:
-    def __init__(
-        self, sub_dir_name: str = "sample", time_format: str = "%Y-%m-%d_%H%M%S"
-    ):
-        self._sub_dir_name = sub_dir_name
+    def __init__(self, time_format: str = "%Y-%m-%d_%H%M%S"):
         self._time_format = time_format
 
         self._logging_format = "Generated {file_type} file: {path}"
@@ -97,7 +94,7 @@ class MIDIWriter:
         output_dir: Union[str, Path],
         prefix: str = "sequence",
     ) -> None:
-        output_dir = Path(output_dir).joinpath(self._sub_dir_name)
+        output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
 
         if not isinstance(sequences, list):
