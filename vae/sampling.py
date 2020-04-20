@@ -14,5 +14,8 @@ def sample(
 ) -> List[NoteSequence]:
     model = utils.get_model(model_name)
     sample_sequences = model.sample(n=2, length=num_steps_per_sample, **sample_kwargs)
-    utils.save_midi(sample_sequences, output_dir)
+
+    midi_writer = utils.MIDIWriter()
+    midi_writer.write_midi(sample_sequences, output_dir)
+    midi_writer.write_plot(sample_sequences, output_dir)
     return sample_sequences

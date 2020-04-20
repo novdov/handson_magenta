@@ -6,3 +6,7 @@ means is that it will progressively change the scores, going from the first samp
 
 
 <img src="../src/vae/vae-01.png" width=60% height="60%">
+
+### `.lokl`/`.hikl` in model name
+- low or high Kullback-Leibler (KL) divergence
+- KL divergence measures how much two probability distributions diverge from each other.
