@@ -8,7 +8,7 @@ from vae import core
 
 
 def get_parser(_=None):
-    parser = argparse.ArgumentParser("vae_interpolation")
+    parser = argparse.ArgumentParser("vae_groove")
     parser.add_argument("--model_name", type=str, default="groovae_2bar_humanize")
     parser.add_argument("--input_midi", type=str)
     parser.add_argument("--num_bar_per_sample", type=int, default=2)
